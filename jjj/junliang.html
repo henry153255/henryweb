@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Men ToGou · 骏良 门头沟大队</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --moss-green: #6F8F72;
+    --moss-dark: #3F5F44;
+    --moss-light: #DDE7D8;
+    --cream: #F7F4ED;
+    --brown: #B58A54;
+    --text-main: #2F3A31;
+    --text-sub: #6B756D;
+    --white: #FFFFFF;
+    --shadow: 0 10px 24px rgba(63, 95, 68, 0.12);
+  }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--text-main);
+    line-height: 1.6;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  /* 顶部区域 */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(111, 143, 114, 0.12);
+  }
+  .top-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 24px;
+  }
+  .brand {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--moss-dark);
+    letter-spacing: 1px;
+  }
+  .brand span {
+    color: var(--brown);
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: var(--cream);
+    border: 1px solid var(--moss-light);
+    border-radius: 999px;
+    padding: 8px 14px;
+    width: 260px;
+  }
+  .search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-main);
+  }
+  .search-box button {
+    border: none;
+    background: var(--moss-green);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  /* 导航 */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--moss-light);
+  }
+  .nav-list {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 24px;
+    list-style: none;
+  }
+  .nav-list a {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--text-sub);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .nav-list a:hover,
+  .nav-list a.active {
+    background: var(--moss-green);
+    color: white;
+  }
+  /* 首屏横幅 */
+  .hero {
+    margin-top: 24px;
+    border-radius: 28px;
+    background:
+      linear-gradient(135deg, rgba(63, 95, 68, 0.82), rgba(111, 143, 114, 0.62)),
+      url("dahezhao.jpeg") center / cover no-repeat;
+      color: white;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .hero-content {
+    max-width: 640px;
+  }
+  .hero h1 {
+    font-size: 44px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: #FFE7B7;
+  }
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 24px;
+    opacity: 0.92;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--brown);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .btn:hover {
+    background: #A37744;
+    transform: translateY(-2px);
+  }
+  /* 通用板块标题 */
+  .section-title {
+    margin: 56px 0 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .section-title h2 {
+    font-size: 26px;
+    color: var(--moss-dark);
+  }
+  .section-title .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--moss-light), transparent);
+  }
+  /* 直播大事件 */
+  .live-event {
+    background: var(--white);
+    border: 1px solid var(--moss-light);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .live-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 24px;
+  }
+  .live-img {
+    border-radius: 18px;
+    overflow: hidden;
+    height: 280px;
+    background: var(--moss-light);
+  }
+  .live-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .live-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .live-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    background: var(--cream);
+    border-radius: 14px;
+    border-left: 4px solid var(--moss-green);
+    transition: transform 0.2s ease;
+  }
+  .live-item:hover {
+    transform: translateX(4px);
+    background: var(--moss-light);
+  }
+  .live-item .text {
+    font-weight: 600;
+    color: var(--moss-dark);
+  }
+  .live-item .date {
+    font-size: 13px;
+    color: var(--text-sub);
+    background: white;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  /* 卡片通用样式 */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 18px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--moss-light);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 12px rgba(63, 95, 68, 0.06);
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+  .card-cover {
+    aspect-ratio: 4 / 3;
+    background: var(--moss-light);
+    overflow: hidden;
+  }
+  .card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card-body {
+    padding: 14px;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--moss-dark);
+    margin-bottom: 8px;
+  }
+  .card-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-sub);
+  }
+  .tag {
+    background: var(--moss-light);
+    color: var(--moss-dark);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+  }
+  /* 小狗档案 */
+  .dog-profile .card-cover {
+    border-radius: 50%;
+    margin: 16px auto 10px;
+    width: 110px;
+    height: 110px;
+    border: 4px solid var(--moss-light);
+  }
+  .dog-profile .card-body {
+    text-align: center;
+    padding-top: 0;
+  }
+  .dog-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--moss-dark);
+  }
+  .dog-desc {
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-top: 6px;
+  }
+  /* 页脚 */
+  footer {
+    margin-top: 72px;
+    background: var(--moss-dark);
+    color: white;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  footer p {
+    opacity: 0.85;
+    font-size: 14px;
+  }
+  /* 响应式 */
+  @media (max-width: 900px) {
+    .hero {
+      padding: 56px 24px;
+    }
+    .hero h1 {
+      font-size: 34px;
+    }
+    .live-grid {
+      grid-template-columns: 1fr;
+    }
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .search-box {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .top-inner {
+      padding: 14px 16px;
+    }
+    .hero h1 {
+      font-size: 28px;
+    }
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .section-title h2 {
+      font-size: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+  <!-- 顶部品牌与搜索 -->
+  <header class="top-bar">
+    <div class="top-inner container">
+      <div class="brand">Men <span>ToGou</span></div>
+      <div class="search-box">
+        <input type="text" placeholder="搜索莲梅、秘书、老狗" />
+        <button>搜索</button>
+      </div>
+    </div>
+    <!-- 导航 -->
+     <nav>
+      <ul class="nav-list container">
+        <li><a href="#" class="active">首页</a></li>
+        <li><a href="#">狗狗们</a></li>
+        <li><a href="#">产品</a></li>
+        <li><a href="#">日常</a></li>
+        <li><a href="#">莲梅情报站</a></li>
+        <li><a href="#">关于我们</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    <!-- 首屏横幅 -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>骏良 · <em>门头沟大队</em></h1>
+        <p>好多大狗啊！</p>
+        <a href="#" class="btn">前往抖音主页</a>
+      </div>
+    </section>
+    <!-- 直播大事件 -->
+    <div class="section-title">
+      <h2>直播大事件</h2>
+      <span class="line"></span>
+    </div>
+    <section class="live-event">
+      <div class="live-grid">
+        <div class="live-img">
+          <img src="touxiang.jped" alt="直播截图" />
+        </div>
+        <div class="live-list">
+          <div class="live-item">
+            <span class="text">好孩子偷吃狗粮肚子像皮球一样</span>
+            <span class="date">10.5</span>
+          </div>
+          <div class="live-item">
+            <span class="text">小杜翻窗户逃跑</span>
+            <span class="date">10.5</span>
+          </div>
+          <div class="live-item">
+            <span class="text">豆豆咳嗽疑似感冒</span>
+            <span class="date">10.5</span>
+          </div>
+          <div class="live-item">
+            <span class="text">良实话实说，最近没怎么瘦</span>
+            <span class="date">10.5</span>
+          </div>
+          <div class="live-item">
+            <span class="text">胖宝宝被小虎传染咬棍子</span>
+            <span class="date">10.5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 电子榨菜 -->
+    <div class="section-title">
+      <h2>电子榨菜</h2>
+      <span class="line"></span>
+    </div>
+    <section class="card-grid">
+      <article class="card">
+        <div class="card-cover">
+          <img src="dzzc1.jpeg" alt="视频封面" />
+        </div>
+        <div class="card-body">
+          <div class="card-title">全员体检</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="dzzc2.jpeg" alt="视频封面" />
+        </div>
+        <div class="card-body">
+          <div class="card-title">盖新房</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="dzzc3.jpeg" alt="视频封面" />
+        </div>
+        <div class="card-body">
+          <div class="card-title">好戏连播</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="dzzc4.jpeg" alt="视频封面" />
+        </div>
+        <div class="card-body">
+          <div class="card-title">骏良回沟</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="dzzc5.jpeg" alt="视频封面" />
+        </div>
+        <div class="card-body">
+          <div class="card-title">三世同堂</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="dzzc6.jpeg" alt="视频封面" />
+        </div>
+        <div class="card-body">
+          <div class="card-title">小虎探亲</div>
+        </div>
+      </article>
+    </section>
+    <!-- 小狗档案 -->
+    <div class="section-title">
+      <h2>小狗档案</h2>
+      <span class="line"></span>
+    </div>
+    <section class="card-grid dog-profile">
+      <article class="card">
+        <div class="card-cover">
+          <img src="doudou.jpeg" alt="黄黄" />
+        </div>
+        <div class="card-body">
+          <div class="dog-name">豆豆</div>
+          <div class="dog-desc">门头沟跑酷协会会长</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="xiaodu.jpeg" alt="豆豆" />
+        </div>
+        <div class="card-body">
+          <div class="dog-name">小杜</div>
+          <div class="dog-desc">狗界德华</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="haohaizi.jpeg" alt="胖宝宝" />
+        </div>
+        <div class="card-body">
+          <div class="dog-name">好孩子</div>
+          <div class="dog-desc">史莱姆女士</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="xiaobao.jpeg" alt="小白" />
+        </div>
+        <div class="card-body">
+          <div class="dog-name">小宝</div>
+          <div class="dog-desc">洗洁精厂长</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="huanghuang.jpeg" alt="花花" />
+        </div>
+        <div class="card-body">
+          <div class="dog-name">黄黄</div>
+          <div class="dog-desc">门头沟储君</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-cover">
+          <img src="suanpi.jpeg" alt="阿福" />
+        </div>
+        <div class="card-body">
+          <div class="dog-name">蒜皮</div>
+          <div class="dog-desc">门头沟盆地</div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <!-- 页脚 -->
+  <footer>
+    <p>抖音@骏良｜门头沟大队｜版权所有</p>
+  </footer>
+style="width:300px;">
+
+</body>
+</html>
